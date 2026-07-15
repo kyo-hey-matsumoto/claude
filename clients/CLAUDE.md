@@ -18,6 +18,12 @@ clients/<client-slug>/                # クライアント単位
 
 サンプルは `clients/_example/sample-project/` を参照（実在のクライアントではないテンプレート）。
 
+### 部署／事業部が挟まる場合の拡張パターン
+
+クライアントによっては、プロジェクトの前に部署・事業部の階層が必要になる（例: `clients/<client>/<business-unit>/<project>/`）。この場合、`@import`とskillsのsymlinkは**事業部階層のCLAUDE.mdに一括で設定**し、配下のプロジェクトフォルダはそれを継承するだけにする（プロジェクト側で再度importし直さない）。さらに、事業部を横断する共通業務（広告運用・タグ設定・レポート業務など）がある場合は `clients/<client>/shared-operations/` のような独立フォルダを作り、各事業部のCLAUDE.mdから `@import` する。
+
+実例は `clients/autospirit/` を参照（レンタカー事業配下に個人向け／法人向けの2プロジェクト、板金修理・中古車販売買取は事業部=プロジェクトとして扱い、全事業部が `shared-operations/` を共通インポートしている）。
+
 ## なぜこの構成か
 
 Claude CodeはCLAUDE.mdと`.claude/skills/`を、作業ディレクトリから見て**親方向にのみ**自動で読み込む。兄弟ディレクトリ（例: `clients/`から見た`marketing/`）は自動では読み込まれない。そのため、プロジェクトが複数ドメインを横断する場合は、プロジェクトのCLAUDE.mdで明示的に`@`構文を使ってドメインのCLAUDE.mdをインポートし、`.claude/skills/`にはシンボリックリンクでドメインのスキルを集約する。
