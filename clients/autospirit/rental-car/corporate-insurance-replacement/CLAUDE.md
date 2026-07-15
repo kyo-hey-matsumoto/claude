@@ -60,7 +60,8 @@
 ## 関連ドキュメント
 
 - [HANDOFF.md](./HANDOFF.md) — 配車・在庫ボードのデータモデル・業務ルール詳細（開発引き継ぎ資料）
-- [vehicle-status-board-v5_1.jsx](./vehicle-status-board-v5_1.jsx) — 現行プロトタイプソース（Claudeアーティファクト版）
+- [vehicle-status-board-v5_1.jsx](./vehicle-status-board-v5_1.jsx) — 旧プロトタイプソース（Claudeアーティファクト版、参考用）
+- 実装コード: `~/Desktop/US/vehicle-status-board/`（このナレッジリポジトリとは別のgitリポジトリ。2026-07-16〜、Next.js + SQLiteでスタンドアロンアプリとして実装開始。詳細はそちらのREADME.md参照）
 
 ## 未整備（要ヒアリング、継続）
 
