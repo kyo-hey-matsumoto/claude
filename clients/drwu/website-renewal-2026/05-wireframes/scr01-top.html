@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<title>SCR-01 TOPページ ワイヤーフレーム | DR.WU</title>
+<style>
+:root{
+  --bg:#faf8f6; --surface:#ffffff; --text:#2a2422; --text-sub:#8a7f7a;
+  --border:#e5ded9; --accent:#c65d54; --accent-soft:#f3e1de; --dark:#221c1a;
+  --mandelic:#2a2422; --hyalu:#b7c4c8; --gluta:#d9c98f; --retinoid:#c3b6c8;
+  --derma:#b8c4b0; --uv:#a9c6d1; --basemake:#d9b9bd;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#ececec;padding:40px 16px;}
+h1{max-width:680px;margin:0 auto 4px;font-size:16px;color:#222;}
+.meta{max-width:680px;margin:0 auto 20px;font-size:11px;color:#777;}
+.wrap{display:flex;gap:32px;justify-content:center;align-items:flex-start;flex-wrap:wrap;}
+.phone{width:375px;background:var(--bg);border-radius:36px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.18);border:8px solid #111;}
+.statusbar{height:28px;background:var(--dark);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.nav{height:52px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.logo{font-size:15px;font-weight:700;letter-spacing:.08em;color:var(--text);}
+.nav-icons{display:flex;gap:14px;font-size:14px;color:var(--text-sub);}
+.section{padding:20px 16px;border-bottom:1px solid var(--border);}
+.section-title{font-size:8px;letter-spacing:.18em;color:var(--text-sub);font-weight:500;margin-bottom:6px;text-transform:uppercase;}
+.section-h{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.section-sub{font-size:10px;color:var(--text-sub);font-weight:300;margin-bottom:12px;}
+.tag{display:inline-block;border:.5px solid #d4d4d4;border-radius:20px;padding:4px 11px;font-size:10px;margin:0 6px 6px 0;color:var(--text-sub);}
+.tag-on{border-color:var(--text);font-weight:500;color:var(--text);}
+.cta{display:block;text-align:center;background:var(--accent);color:#fff;font-size:12px;font-weight:600;padding:13px;border-radius:6px;margin-top:10px;text-decoration:none;}
+.cta-ghost{display:block;text-align:center;background:#fff;color:var(--accent);border:1px solid var(--accent);font-size:12px;font-weight:600;padding:12px;border-radius:6px;margin-top:8px;text-decoration:none;}
+.footer{background:var(--dark);color:#cfc7c2;padding:24px 16px;font-size:9px;line-height:2;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;position:relative;}
+.ph{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.65);text-align:center;padding:4px;}
+.pname{font-size:11px;font-weight:400;padding:8px 8px 2px;color:var(--text);}
+.pprice{font-size:11px;padding:0 8px 8px;color:var(--text);}
+.badge{position:absolute;top:6px;left:6px;width:18px;height:18px;border-radius:50%;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.rank-1{background:#b8960c}.rank-2{background:#787878}.rank-3{background:#8c5c2c}
+.kv{position:relative;background:var(--mandelic);color:#fff;padding:32px 16px 24px;}
+.kv-eyebrow{font-size:9px;letter-spacing:.2em;color:#e8c9a0;margin-bottom:8px;}
+.kv-title{font-size:20px;font-weight:700;line-height:1.4;margin-bottom:6px;}
+.kv-sub{font-size:11px;color:#cfc7c2;font-weight:300;margin-bottom:16px;}
+.kv-ph{width:100%;height:180px;background:#3a332f;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,.5);margin-bottom:14px;}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-size:9px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 9px;}
+.camp-card{min-width:150px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;flex:0 0 auto;}
+.camp-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
+.camp-tag{font-size:8px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 6px;display:inline-block;margin-bottom:6px;}
+.concern-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.concern-tile{aspect-ratio:1/1;border-radius:8px;display:flex;align-items:flex-end;padding:8px;color:#fff;font-size:10px;font-weight:600;}
+.series-row{display:flex;gap:8px;overflow-x:auto;}
+.series-pill{flex:0 0 auto;width:72px;text-align:center;}
+.series-ph{width:72px;height:72px;border-radius:50%;margin-bottom:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;}
+.guide-card{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;}
+.guide-ph{width:48px;height:48px;border-radius:6px;background:var(--accent-soft);flex:0 0 auto;}
+.line-box{background:#06c755;color:#fff;border-radius:10px;padding:16px;text-align:center;}
+.line-box .cta{background:#fff;color:#06c755;}
+.sidebar{width:300px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;font-size:11px;line-height:1.7;color:#444;}
+.sidebar h3{font-size:12px;margin-bottom:10px;}
+.sidebar li{margin-bottom:10px;list-style:none;}
+.sidebar b{color:#111;}
+.note{background:#fffbe0;border:1px solid #f0e4a0;border-radius:4px;padding:8px;margin:12px 0;font-size:10px;}
+</style>
+</head>
+<body>
+<h1>SCR-01｜TOPページ ワイヤーフレーム（スマートフォン / 375px）</h1>
+<div class="meta">対応要件: FR-01〜FR-08　/　03-screen-list.csv 参照　/　低〜中忠実度・配色はプレースホルダー（本番はブランドガイドラインに準拠）</div>
+<div class="wrap">
+<div class="phone">
+  <div class="statusbar"><span>9:41</span><span>●●● Wi-Fi 100%</span></div>
+  <div class="nav"><div class="logo">DR.WU</div><div class="nav-icons"><span>☰</span><span>♡</span><span>🔍</span><span>🛒</span></div></div>
+
+  <!-- ① ファーストビュー -->
+  <div class="kv">
+    <div class="kv-eyebrow">① FIRST VIEW — 主役はマンデリック</div>
+    <div class="kv-title">毛穴・ざらつき・くすみに。<br>まずはこれから、はじめよう。</div>
+    <div class="kv-sub">マンデリック インテンシブ リニューアル セラム 18%</div>
+    <div class="kv-ph">[ マンデリック セラム ビジュアル ]</div>
+    <div class="pill-row">
+      <span class="pill">初めての方はこちら →</span>
+      <span class="pill">30日集中プログラムを見る →</span>
+    </div>
+    <a class="cta" href="#">マンデリックの商品ページへ</a>
+  </div>
+
+  <!-- ② 開催中キャンペーン -->
+  <div class="section">
+    <div class="section-title">② Campaign</div>
+    <div class="section-h">開催中キャンペーン</div>
+    <div class="section-sub">今買う理由／次に買う理由をひと目で</div>
+    <div class="camp-row">
+      <div class="camp-card"><span class="camp-tag">初回限定</span><div style="font-size:10px;">初めての方限定10%OFF</div></div>
+      <div class="camp-card"><span class="camp-tag">LINE特典</span><div style="font-size:10px;">友だち追加でポイント進呈</div></div>
+      <div class="camp-card"><span class="camp-tag">セット特典</span><div style="font-size:10px;">セット購入で送料無料</div></div>
+      <div class="camp-card"><span class="camp-tag">season</span><div style="font-size:10px;">夏の紫外線対策特集</div></div>
+    </div>
+    <a class="cta-ghost" href="#">キャンペーン一覧を見る（SCR-03）</a>
+  </div>
+
+  <!-- ③ 肌悩みから選ぶ -->
+  <div class="section">
+    <div class="section-title">③ Concern</div>
+    <div class="section-h">肌悩みから選ぶ</div>
+    <div class="section-sub">自分の悩みに合う商品がすぐ見つかる</div>
+    <div class="concern-grid">
+      <div class="concern-tile" style="background:#8a7368">毛穴・ざらつき</div>
+      <div class="concern-tile" style="background:var(--hyalu)">乾燥・うるおい</div>
+      <div class="concern-tile" style="background:var(--gluta)">くすみ・透明感</div>
+      <div class="concern-tile" style="background:var(--retinoid)">ハリ・年齢肌</div>
+      <div class="concern-tile" style="background:var(--derma)">敏感肌</div>
+      <div class="concern-tile" style="background:var(--uv)">UV対策</div>
+    </div>
+  </div>
+
+  <!-- ④ おすすめセット -->
+  <div class="section">
+    <div class="section-title">④ Set</div>
+    <div class="section-h">おすすめセット</div>
+    <div class="section-sub">目的別セットで、続けやすく・お得に</div>
+    <div class="grid2">
+      <div class="card"><div class="ph" style="background:var(--mandelic)">つるん肌<br>30日集中セット</div><div class="pname">マンデリック＋ヒアルコンプレクス</div><div class="pprice">¥●,●●●（単品合計より●%お得）</div></div>
+      <div class="card"><div class="ph" style="background:var(--hyalu)">乾燥対策<br>セット</div><div class="pname">ヒアルコンプレクス フルライン</div><div class="pprice">¥●,●●●</div></div>
+    </div>
+  </div>
+
+  <!-- ⑤ 売れ筋ランキング -->
+  <div class="section">
+    <div class="section-title">⑤ Ranking</div>
+    <div class="section-h">売れ筋ランキング</div>
+    <div class="section-sub">迷ったら、まずこれ</div>
+    <div class="grid3">
+      <div class="card"><span class="badge rank-1">1</span><div class="ph" style="background:var(--mandelic)">マンデリック<br>セラム</div><div class="pname" style="font-size:9px;">毛穴・ざらつきに</div></div>
+      <div class="card"><span class="badge rank-2">2</span><div class="ph" style="background:var(--hyalu)">ヒアルコンプレクス<br>エッセンストナー</div><div class="pname" style="font-size:9px;">乾燥・うるおいに</div></div>
+      <div class="card"><span class="badge rank-3">3</span><div class="ph" style="background:var(--gluta)">グルタライトC<br>美容液</div><div class="pname" style="font-size:9px;">くすみ・透明感に</div></div>
+    </div>
+  </div>
+
+  <!-- ⑥ シリーズから探す -->
+  <div class="section">
+    <div class="section-title">⑥ Series</div>
+    <div class="section-h">シリーズから探す</div>
+    <div class="series-row">
+      <div class="series-pill"><div class="series-ph" style="background:var(--mandelic)">マンデリック</div></div>
+      <div class="series-pill"><div class="series-ph" style="background:var(--hyalu)">ヒアルコンプレクス</div></div>
+      <div class="series-pill"><div class="series-ph" style="background:var(--gluta)">グルタライトC</div></div>
+      <div class="series-pill"><div class="series-ph" style="background:var(--retinoid)">トリレチノイド</div></div>
+      <div class="series-pill"><div class="series-ph" style="background:var(--derma)">ダーマラボ</div></div>
+      <div class="series-pill"><div class="series-ph" style="background:var(--uv)">UV</div></div>
+    </div>
+  </div>
+
+  <!-- ⑦ 使い方ガイド -->
+  <div class="section">
+    <div class="section-title">⑦ Guide</div>
+    <div class="section-h">使い方ガイド</div>
+    <div class="guide-card"><div class="guide-ph"></div><div><div style="font-size:11px;font-weight:500;">マンデリックの正しい使い方</div><div style="font-size:9px;color:var(--text-sub);">頻度・保湿・よくある不安Q&A</div></div></div>
+  </div>
+
+  <!-- ⑧ LINE 30日集中プログラム -->
+  <div class="section">
+    <div class="section-title">⑧ LINE Program</div>
+    <div class="line-box">
+      <div style="font-size:12px;font-weight:700;margin-bottom:4px;">つるん肌30日集中プログラム</div>
+      <div style="font-size:10px;margin-bottom:10px;">LINEで使い方サポート＆特典をお届け</div>
+      <a class="cta" href="#">LINEで友だち追加</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    ご利用ガイド　よくあるご質問　お問い合わせ<br>
+    プライバシーポリシー　特定商取引法に基づく表記<br>
+    © DR.WU
+  </div>
+</div>
+
+<div class="sidebar">
+  <h3>アノテーション（SCR-01 TOP）</h3>
+  <ul>
+    <li><b>①ファーストビュー</b>：TOP最上部でマンデリックのみを訴求。他シリーズはここに出さない（改修方針①）</li>
+    <li><b>②キャンペーン</b>：横スクロールカード。詳細はSCR-03（キャンペーン一覧）へ遷移</li>
+    <li><b>③肌悩み</b>：6タイルのみ表示、タップでSCR-05（肌悩み別コレクション）へ</li>
+    <li><b>④セット</b>：2列グリッド、価格は単品合計比のお得額を明示（客単価向上施策）</li>
+    <li><b>⑤ランキング</b>：TOP3を表示し「全ランキングを見る」でSCR-06へ（本ワイヤーでは省略）</li>
+    <li><b>⑥シリーズ</b>：横スクロールの円形サムネイル。タップで各シリーズコレクション/特設LPへ</li>
+    <li><b>⑦ガイド／⑧LINE</b>：購入前後の不安解消とLINE登録をTOP下部に集約（改修方針⑦⑧）</li>
+  </ul>
+  <div class="note">配色はプレースホルダーのトーン。マンデリックはブランド訴求上「主役」として最も濃いダーク基調にしている。実際のブランドカラーは要確認。</div>
+  <div class="note">計測要件：各セクションのクリック・CVRをGA4イベントで取得する前提（06-external-integrations.md参照）</div>
+</div>
+</div>
+</body></html>

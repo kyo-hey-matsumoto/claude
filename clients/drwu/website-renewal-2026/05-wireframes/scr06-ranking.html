@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<title>SCR-06 売れ筋ランキングページ ワイヤーフレーム | DR.WU</title>
+<style>
+:root{--bg:#faf8f6;--text:#2a2422;--text-sub:#8a7f7a;--border:#e5ded9;--accent:#c65d54;--dark:#221c1a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#ececec;padding:40px 16px;}
+h1{max-width:680px;margin:0 auto 4px;font-size:16px;color:#222;}
+.meta{max-width:680px;margin:0 auto 20px;font-size:11px;color:#777;}
+.wrap{display:flex;gap:32px;justify-content:center;align-items:flex-start;flex-wrap:wrap;}
+.phone{width:375px;background:var(--bg);border-radius:36px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.18);border:8px solid #111;}
+.statusbar{height:28px;background:var(--dark);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.nav{height:52px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 16px;}
+.back{font-size:16px;color:var(--text-sub);}
+.navtitle{font-size:13px;font-weight:700;}
+.section{padding:16px;border-bottom:1px solid var(--border);}
+.tabs{display:flex;gap:8px;margin-bottom:14px;}
+.tab{font-size:10px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);color:var(--text-sub);}
+.tab.on{background:var(--text);color:#fff;border-color:var(--text);}
+.rank-row{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:10px;}
+.rank-num{width:24px;height:24px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.rank-1{background:#b8960c}.rank-2{background:#787878}.rank-3{background:#8c5c2c}.rank-n{background:#2a2a2a}
+.rank-ph{width:56px;height:56px;border-radius:6px;flex:0 0 auto;}
+.rank-body{flex:1;}
+.rank-name{font-size:11px;font-weight:500;color:var(--text);}
+.rank-concern{font-size:9px;color:var(--accent);margin:2px 0;}
+.rank-price{font-size:10px;color:var(--text-sub);}
+.footer{background:var(--dark);color:#cfc7c2;padding:24px 16px;font-size:9px;line-height:2;}
+.sidebar{width:300px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;font-size:11px;line-height:1.7;color:#444;}
+.sidebar h3{font-size:12px;margin-bottom:10px;}
+.sidebar li{margin-bottom:10px;list-style:none;}
+.note{background:#fffbe0;border:1px solid #f0e4a0;border-radius:4px;padding:8px;margin:12px 0;font-size:10px;}
+</style>
+</head>
+<body>
+<h1>SCR-06｜売れ筋ランキングページ ワイヤーフレーム（スマートフォン / 375px）</h1>
+<div class="meta">対応要件: FR-05　/　TOPセクション⑤「全ランキングを見る」からの遷移先　/　新設ページ</div>
+<div class="wrap">
+<div class="phone">
+  <div class="statusbar"><span>9:41</span><span>●●● Wi-Fi 100%</span></div>
+  <div class="nav"><span class="back">←</span><span class="navtitle">売れ筋ランキング</span></div>
+  <div class="section">
+    <div style="font-size:10px;color:var(--text-sub);margin-bottom:12px;">迷ったら、まずはこの中から。「どんな悩みにおすすめか」も一緒にチェック</div>
+    <div class="tabs">
+      <span class="tab on">総合</span>
+      <span class="tab">マンデリック</span>
+      <span class="tab">保湿</span>
+      <span class="tab">UV</span>
+    </div>
+
+    <div class="rank-row"><span class="rank-num rank-1">1</span><div class="rank-ph" style="background:#2a2422"></div><div class="rank-body"><div class="rank-name">マンデリック インテンシブ リニューアル セラム 18%</div><div class="rank-concern">毛穴・ざらつき・くすみに</div><div class="rank-price">¥●,●●●</div></div></div>
+    <div class="rank-row"><span class="rank-num rank-2">2</span><div class="rank-ph" style="background:#b7c4c8"></div><div class="rank-body"><div class="rank-name">ヒアルコンプレクス エッセンストナー</div><div class="rank-concern">乾燥・うるおいに</div><div class="rank-price">¥●,●●●</div></div></div>
+    <div class="rank-row"><span class="rank-num rank-3">3</span><div class="rank-ph" style="background:#d9c98f"></div><div class="rank-body"><div class="rank-name">グルタライトC 美容液</div><div class="rank-concern">くすみ・透明感に</div><div class="rank-price">¥●,●●●</div></div></div>
+    <div class="rank-row"><span class="rank-num rank-n">4</span><div class="rank-ph" style="background:#a9c6d1"></div><div class="rank-body"><div class="rank-name">DR.WU 日焼け止め（サンケアシリーズ）</div><div class="rank-concern">UV対策に</div><div class="rank-price">¥●,●●●</div></div></div>
+    <div class="rank-row"><span class="rank-num rank-n">5</span><div class="rank-ph" style="background:#c3b6c8"></div><div class="rank-body"><div class="rank-name">トリレチノイド インテンシブリバイタライジングセラム</div><div class="rank-concern">ハリ・年齢肌に</div><div class="rank-price">¥●,●●●</div></div></div>
+  </div>
+  <div class="footer">ご利用ガイド　よくあるご質問　お問い合わせ<br>© DR.WU</div>
+</div>
+<div class="sidebar">
+  <h3>アノテーション（SCR-06 売れ筋ランキング）</h3>
+  <ul>
+    <li>タブ切替（総合／シリーズ別）で見たいランキングを絞り込み</li>
+    <li>各商品に「どんな悩みにおすすめか」の一言を必ず添える（購入判断の後押し、改修方針⑤）</li>
+    <li>1〜3位はゴールド/シルバー/ブロンズのランクバッジで視認性を上げる</li>
+  </ul>
+  <div class="note">集計方式が要検討：①販売数の自動集計アプリを導入 / ②当面は月次で手動更新、の2案（04-feature-list.csv F-05参照）</div>
+</div>
+</div>
+</body></html>

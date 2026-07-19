@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<title>05. ワイヤーフレーム一覧 | DR.WU website-renewal-2026</title>
+<style>
+:root{--bg:#faf8f6;--text:#2a2422;--text-sub:#8a7f7a;--border:#e5ded9;--accent:#c65d54;--dark:#221c1a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#f4f2f0;color:var(--text);padding:40px 20px;}
+.wrap{max-width:880px;margin:0 auto;}
+h1{font-size:20px;margin-bottom:6px;}
+.lead{font-size:12px;color:var(--text-sub);margin-bottom:28px;line-height:1.7;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--text);display:block;transition:box-shadow .15s;}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);}
+.scr-id{font-size:9px;letter-spacing:.12em;color:var(--accent);font-weight:700;margin-bottom:6px;}
+.scr-name{font-size:14px;font-weight:700;margin-bottom:8px;}
+.scr-desc{font-size:11px;color:var(--text-sub);line-height:1.6;margin-bottom:8px;}
+.scr-fr{font-size:9px;color:#999;}
+.note{max-width:880px;margin:28px auto 0;background:#fffbe0;border:1px solid #f0e4a0;border-radius:6px;padding:14px;font-size:11px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>05. ワイヤーフレーム一覧</h1>
+<div class="lead">
+DR.WU（drwu.jp）ホームページ改編プロジェクトの主要画面ワイヤーフレーム。<a href="../03-screen-list.csv">03-screen-list.csv</a> のうち「ワイヤーフレーム対象」とした7画面を、スマートフォン375px想定の低〜中忠実度HTMLとして作成。配色はプレースホルダーで、ビジュアルデザインは別工程（Figma等）で行う。
+</div>
+<div class="grid">
+  <a class="card" href="./scr01-top.html">
+    <div class="scr-id">SCR-01</div>
+    <div class="scr-name">TOPページ</div>
+    <div class="scr-desc">ファーストビュー〜キャンペーン〜肌悩み〜セット〜ランキング〜シリーズ〜ガイド〜LINEの8セクション構成</div>
+    <div class="scr-fr">対応: FR-01〜FR-08</div>
+  </a>
+  <a class="card" href="./scr03-campaign-list.html">
+    <div class="scr-id">SCR-03</div>
+    <div class="scr-name">キャンペーン一覧ページ</div>
+    <div class="scr-desc">初回限定／LINE登録特典／セット購入特典／季節企画をタブ切替で一覧表示</div>
+    <div class="scr-fr">対応: FR-02</div>
+  </a>
+  <a class="card" href="./scr05-concern-collection.html">
+    <div class="scr-id">SCR-05</div>
+    <div class="scr-name">肌悩み別コレクションページ</div>
+    <div class="scr-desc">6悩み共通テンプレート。悩み訴求ヒーロー＋タグ絞り込み＋商品グリッド</div>
+    <div class="scr-fr">対応: FR-03</div>
+  </a>
+  <a class="card" href="./scr06-ranking.html">
+    <div class="scr-id">SCR-06</div>
+    <div class="scr-name">売れ筋ランキングページ</div>
+    <div class="scr-desc">TOP5表示、順位バッジ＋悩み訴求コピー付き</div>
+    <div class="scr-fr">対応: FR-05</div>
+  </a>
+  <a class="card" href="./scr08-series-mandelic-lp.html">
+    <div class="scr-id">SCR-08</div>
+    <div class="scr-name">シリーズ特設LP（マンデリック）</div>
+    <div class="scr-desc">比較表・使用方法・組み合わせ提案を含む作り込み型LP。赤字対象商品向け</div>
+    <div class="scr-fr">対応: FR-06</div>
+  </a>
+  <a class="card" href="./scr10-set-product.html">
+    <div class="scr-id">SCR-10</div>
+    <div class="scr-name">おすすめセット商品ページ</div>
+    <div class="scr-desc">3セット共通テンプレート。単品合計とセット価格の比較を明示</div>
+    <div class="scr-fr">対応: FR-04</div>
+  </a>
+  <a class="card" href="./scr14-line-program.html">
+    <div class="scr-id">SCR-14</div>
+    <div class="scr-name">LINE連携・30日集中プログラム</div>
+    <div class="scr-desc">友だち追加の便益提示＋よくある不安Q&Aで購入後の不安を解消</div>
+    <div class="scr-fr">対応: FR-08, FR-09</div>
+  </a>
+</div>
+<div class="note">
+対象外とした画面（SCR-02, 04, 07, 09, 11〜13, 15〜22）は既存テンプレートの流用・軽微な拡張、またはレガシー整理対象のため、本フェーズのワイヤーフレームは省略している。詳細は <a href="../03-screen-list.csv">03-screen-list.csv</a> を参照。
+</div>
+</div>
+</body></html>

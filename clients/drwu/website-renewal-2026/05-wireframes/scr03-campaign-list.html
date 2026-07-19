@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<title>SCR-03 キャンペーン一覧ページ ワイヤーフレーム | DR.WU</title>
+<style>
+:root{--bg:#faf8f6;--surface:#ffffff;--text:#2a2422;--text-sub:#8a7f7a;--border:#e5ded9;--accent:#c65d54;--accent-soft:#f3e1de;--dark:#221c1a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#ececec;padding:40px 16px;}
+h1{max-width:680px;margin:0 auto 4px;font-size:16px;color:#222;}
+.meta{max-width:680px;margin:0 auto 20px;font-size:11px;color:#777;}
+.wrap{display:flex;gap:32px;justify-content:center;align-items:flex-start;flex-wrap:wrap;}
+.phone{width:375px;background:var(--bg);border-radius:36px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.18);border:8px solid #111;}
+.statusbar{height:28px;background:var(--dark);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.nav{height:52px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 16px;}
+.back{font-size:16px;color:var(--text-sub);}
+.navtitle{font-size:13px;font-weight:700;}
+.section{padding:20px 16px;border-bottom:1px solid var(--border);}
+.section-sub{font-size:10px;color:var(--text-sub);font-weight:300;margin-bottom:14px;}
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;}
+.tab{font-size:10px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);color:var(--text-sub);flex:0 0 auto;}
+.tab.on{background:var(--text);color:#fff;border-color:var(--text);}
+.camp-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;}
+.camp-ph{height:120px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;}
+.camp-body{padding:12px;}
+.camp-tag{font-size:8px;color:#fff;background:var(--accent);border-radius:3px;padding:3px 8px;display:inline-block;margin-bottom:8px;}
+.camp-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+.camp-period{font-size:9px;color:var(--text-sub);margin-bottom:8px;}
+.camp-desc{font-size:10px;color:var(--text);line-height:1.6;margin-bottom:10px;}
+.cta-ghost{display:block;text-align:center;background:#fff;color:var(--accent);border:1px solid var(--accent);font-size:11px;font-weight:600;padding:10px;border-radius:6px;text-decoration:none;}
+.footer{background:var(--dark);color:#cfc7c2;padding:24px 16px;font-size:9px;line-height:2;}
+.sidebar{width:300px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;font-size:11px;line-height:1.7;color:#444;}
+.sidebar h3{font-size:12px;margin-bottom:10px;}
+.sidebar li{margin-bottom:10px;list-style:none;}
+.note{background:#fffbe0;border:1px solid #f0e4a0;border-radius:4px;padding:8px;margin:12px 0;font-size:10px;}
+</style>
+</head>
+<body>
+<h1>SCR-03｜キャンペーン一覧ページ ワイヤーフレーム（スマートフォン / 375px）</h1>
+<div class="meta">対応要件: FR-02　/　TOPのセクション②から遷移する一覧ページ　/　新設ページ（URL未定）</div>
+<div class="wrap">
+<div class="phone">
+  <div class="statusbar"><span>9:41</span><span>●●● Wi-Fi 100%</span></div>
+  <div class="nav"><span class="back">←</span><span class="navtitle">開催中キャンペーン</span></div>
+
+  <div class="section">
+    <div class="section-sub">「今買う理由」「次に買う理由」がここに集約されています</div>
+    <div class="tabs">
+      <span class="tab on">すべて</span>
+      <span class="tab">初回限定</span>
+      <span class="tab">LINE特典</span>
+      <span class="tab">セット特典</span>
+      <span class="tab">季節企画</span>
+    </div>
+
+    <div class="camp-card">
+      <div class="camp-ph" style="background:#2a2422;">[ 初回限定キャンペーン ビジュアル ]</div>
+      <div class="camp-body">
+        <span class="camp-tag">初回限定</span>
+        <div class="camp-title">はじめての方限定 10%OFF</div>
+        <div class="camp-period">期間: 常時開催（初回購入者対象）</div>
+        <div class="camp-desc">マンデリックを含む対象商品が初回限定価格に。まずはお試しください。</div>
+        <a class="cta-ghost" href="#">詳細を見る（SCR-04）</a>
+      </div>
+    </div>
+
+    <div class="camp-card">
+      <div class="camp-ph" style="background:#06c755;">[ LINE登録特典 ビジュアル ]</div>
+      <div class="camp-body">
+        <span class="camp-tag">LINE特典</span>
+        <div class="camp-title">LINE友だち追加でポイントプレゼント</div>
+        <div class="camp-period">期間: 常時開催</div>
+        <div class="camp-desc">友だち追加＋会員登録で期間限定ポイントを進呈。次回のお買い物にご利用いただけます。</div>
+        <a class="cta-ghost" href="#">詳細を見る（SCR-04）</a>
+      </div>
+    </div>
+
+    <div class="camp-card">
+      <div class="camp-ph" style="background:#b7c4c8;">[ セット購入特典 ビジュアル ]</div>
+      <div class="camp-body">
+        <span class="camp-tag">セット特典</span>
+        <div class="camp-title">セット購入で送料無料＋特典</div>
+        <div class="camp-period">期間: 常時開催</div>
+        <div class="camp-desc">おすすめセットのご購入で送料無料。組み合わせでさらにお得に。</div>
+        <a class="cta-ghost" href="#">おすすめセットを見る（SCR-10）</a>
+      </div>
+    </div>
+
+    <div class="camp-card">
+      <div class="camp-ph" style="background:#a9c6d1;">[ 季節企画 ビジュアル ]</div>
+      <div class="camp-body">
+        <span class="camp-tag">season</span>
+        <div class="camp-title">夏の紫外線対策特集</div>
+        <div class="camp-period">期間: 季節ごとに更新</div>
+        <div class="camp-desc">UVシリーズを中心に、季節に合わせたおすすめ商品をご紹介。</div>
+        <a class="cta-ghost" href="#">詳細を見る（SCR-04）</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">ご利用ガイド　よくあるご質問　お問い合わせ<br>© DR.WU</div>
+</div>
+
+<div class="sidebar">
+  <h3>アノテーション（SCR-03 キャンペーン一覧）</h3>
+  <ul>
+    <li>タブ切替（すべて/初回限定/LINE特典/セット特典/季節企画）でカードを絞り込み</li>
+    <li>各カード「詳細を見る」からSCR-04（キャンペーン詳細・共通テンプレート）へ遷移</li>
+    <li>期間限定企画は開始/終了日でカードの表示・非表示を自動制御することを想定（F-02）</li>
+  </ul>
+  <div class="note">実装は原則Shopify標準ページ＋メタフィールドで管理。自動出し分けが必要な場合はアプリ導入を検討（04-feature-list.csv F-02参照）</div>
+</div>
+</div>
+</body></html>
