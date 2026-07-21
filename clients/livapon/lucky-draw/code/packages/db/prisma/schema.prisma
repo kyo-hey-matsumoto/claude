@@ -1,0 +1,563 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRoleName {
+  CUSTOMER
+  PROVIDER
+  OPERATOR
+  ADMIN
+}
+
+enum ExternalIdentityProvider {
+  SHOPIFY_CUSTOMER
+}
+
+enum CourseOfferingStatus {
+  DRAFT
+  OPEN
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum SessionSlotStatus {
+  DRAFT
+  OPEN
+  CANCELLED
+  COMPLETED
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  SUSPENDED
+}
+
+enum ExperienceType {
+  GENERAL
+  COURSE_GRADUATE_ONLY
+}
+
+enum PublicationStatus {
+  DRAFT
+  REVIEW_REQUESTED
+  APPROVED
+  PUBLISHED
+  SUSPENDED
+  ARCHIVED
+}
+
+enum ExperienceSlotStatus {
+  DRAFT
+  OPEN
+  FULL
+  CLOSED
+  COMPLETED
+  CANCELLED
+}
+
+enum BookingStatus {
+  PENDING_PAYMENT
+  PAYMENT_CONFIRMED
+  CONFIRMED
+  CANCEL_REQUESTED
+  CANCELLATION_APPROVED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+  CAPACITY_CONFLICT
+  PROVIDER_CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  PARTIALLY_REFUNDED
+  REFUNDED
+  VOIDED
+}
+
+enum RefundStatus {
+  NONE
+  REQUESTED
+  APPROVED
+  PARTIALLY_REFUNDED
+  REFUNDED
+}
+
+enum ShopifyResourceType {
+  COURSE_OFFERING
+  EXPERIENCE
+  PREMIUM_EXPERIENCE
+  OPTION
+}
+
+enum WebhookStatus {
+  RECEIVED
+  PROCESSING
+  PROCESSED
+  RETRY_PENDING
+  DEAD_LETTER
+  MANUAL_REVIEW
+  DUPLICATE
+}
+
+enum IntegrationJobStatus {
+  PENDING
+  RUNNING
+  SUCCEEDED
+  FAILED
+  DEAD_LETTER
+}
+
+enum OutboxStatus {
+  PENDING
+  PUBLISHED
+  FAILED
+}
+
+model User {
+  id                 String             @id @default(uuid()) @db.Uuid
+  email              String?
+  fullName           String?
+  phone              String?
+  suspendedAt        DateTime?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  externalIdentities ExternalIdentity[]
+  roles              UserRole[]
+  enrollments        Enrollment[]
+  bookings           Booking[]
+  orders             ShopifyOrder[]
+  auditLogs          AuditLog[]
+}
+
+model ExternalIdentity {
+  id               String                   @id @default(uuid()) @db.Uuid
+  userId           String                   @db.Uuid
+  identityProvider ExternalIdentityProvider
+  externalSubject  String
+  createdAt        DateTime                 @default(now())
+  user             User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([identityProvider, externalSubject])
+  @@index([userId])
+}
+
+model UserRole {
+  id        String       @id @default(uuid()) @db.Uuid
+  userId    String       @db.Uuid
+  role      UserRoleName
+  createdAt DateTime     @default(now())
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, role])
+}
+
+model Provider {
+  id          String       @id @default(uuid()) @db.Uuid
+  slug        String       @unique
+  name        String
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  courses     Course[]
+  experiences Experience[]
+}
+
+model Course {
+  id          String           @id @default(uuid()) @db.Uuid
+  providerId  String           @db.Uuid
+  slug        String           @unique
+  title       String
+  summary     String
+  description String
+  imagePath   String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  provider    Provider         @relation(fields: [providerId], references: [id])
+  offerings   CourseOffering[]
+}
+
+model CourseOffering {
+  id          String                  @id @default(uuid()) @db.Uuid
+  courseId    String                  @db.Uuid
+  title       String
+  startsAt    DateTime
+  endsAt      DateTime
+  timeZone    String                  @default("Asia/Tokyo")
+  status      CourseOfferingStatus    @default(OPEN)
+  priceCents  Int
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  course      Course                  @relation(fields: [courseId], references: [id])
+  sessions    Session[]
+  enrollments Enrollment[]
+  mappings    ShopifyProductMapping[]
+}
+
+model Session {
+  id               String               @id @default(uuid()) @db.Uuid
+  courseOfferingId String               @db.Uuid
+  sequenceNo       Int
+  title            String
+  description      String?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  courseOffering   CourseOffering       @relation(fields: [courseOfferingId], references: [id], onDelete: Cascade)
+  slots            SessionSlot[]
+  contentItems     ContentItem[]
+  reservations     SessionReservation[]
+
+  @@unique([courseOfferingId, sequenceNo])
+}
+
+model SessionSlot {
+  id           String               @id @default(uuid()) @db.Uuid
+  sessionId    String               @db.Uuid
+  startsAt     DateTime
+  endsAt       DateTime
+  capacity     Int                  @default(0)
+  meetUrl      String?
+  status       SessionSlotStatus    @default(OPEN)
+  timeZone     String               @default("Asia/Tokyo")
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  session      Session              @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  reservations SessionReservation[]
+}
+
+enum SessionReservationStatus {
+  RESERVED
+  COMPLETED
+  CANCELLED
+}
+
+model SessionReservation {
+  id            String                   @id @default(uuid()) @db.Uuid
+  enrollmentId  String                   @db.Uuid
+  sessionId     String                   @db.Uuid
+  sessionSlotId String                   @db.Uuid
+  status        SessionReservationStatus @default(RESERVED)
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
+  enrollment    Enrollment               @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  session       Session                  @relation(fields: [sessionId], references: [id])
+  sessionSlot   SessionSlot              @relation(fields: [sessionSlotId], references: [id])
+
+  @@unique([enrollmentId, sessionId])
+  @@index([sessionSlotId, status])
+}
+
+model ContentItem {
+  id          String   @id @default(uuid()) @db.Uuid
+  sessionId   String   @db.Uuid
+  title       String
+  url         String
+  contentType String
+  createdAt   DateTime @default(now())
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model Enrollment {
+  id                 String               @id @default(uuid()) @db.Uuid
+  userId             String               @db.Uuid
+  courseOfferingId   String               @db.Uuid
+  shopifyOrderLineId String?              @unique @db.Uuid
+  status             EnrollmentStatus     @default(ACTIVE)
+  completedAt        DateTime?
+  kitShippedAt       DateTime?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  user               User                 @relation(fields: [userId], references: [id])
+  courseOffering     CourseOffering       @relation(fields: [courseOfferingId], references: [id])
+  orderLine          ShopifyOrderLine?    @relation(fields: [shopifyOrderLineId], references: [id])
+  completion         CourseCompletion?
+  reservations       SessionReservation[]
+
+  @@unique([userId, courseOfferingId])
+  @@index([courseOfferingId])
+}
+
+model CourseCompletion {
+  id           String     @id @default(uuid()) @db.Uuid
+  enrollmentId String     @unique @db.Uuid
+  completedAt  DateTime
+  source       String
+  createdAt    DateTime   @default(now())
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+}
+
+model Experience {
+  id          String                      @id @default(uuid()) @db.Uuid
+  providerId  String                      @db.Uuid
+  slug        String                      @unique
+  title       String
+  summary     String
+  description String
+  type        ExperienceType              @default(GENERAL)
+  status      PublicationStatus           @default(PUBLISHED)
+  timeZone    String                      @default("Asia/Tokyo")
+  createdAt   DateTime                    @default(now())
+  updatedAt   DateTime                    @updatedAt
+  provider    Provider                    @relation(fields: [providerId], references: [id])
+  media       ExperienceMedia[]
+  slots       ExperienceSlot[]
+  categories  ParticipantCategory[]
+  rules       ExperienceEligibilityRule[]
+  mappings    ShopifyProductMapping[]
+}
+
+model ExperienceMedia {
+  id           String     @id @default(uuid()) @db.Uuid
+  experienceId String     @db.Uuid
+  url          String
+  altText      String
+  sortOrder    Int        @default(0)
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+}
+
+model ExperienceSlot {
+  id           String               @id @default(uuid()) @db.Uuid
+  experienceId String               @db.Uuid
+  startsAt     DateTime
+  endsAt       DateTime
+  capacity     Int
+  status       ExperienceSlotStatus @default(OPEN)
+  timeZone     String               @default("Asia/Tokyo")
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  experience   Experience           @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  bookings     Booking[]
+
+  @@index([experienceId, startsAt])
+}
+
+model ParticipantCategory {
+  id             String                    @id @default(uuid()) @db.Uuid
+  experienceId   String                    @db.Uuid
+  code           String
+  label          String
+  minAge         Int?
+  maxAge         Int?
+  priceCents     Int
+  capacityWeight Decimal                   @db.Decimal(6, 2)
+  requiresAdult  Boolean                   @default(false)
+  ticketRequired Boolean                   @default(true)
+  isAllowed      Boolean                   @default(true)
+  experience     Experience                @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  counts         BookingParticipantCount[]
+  mappings       ShopifyProductMapping[]
+
+  @@unique([experienceId, code])
+}
+
+model Booking {
+  id                        String                    @id @default(uuid()) @db.Uuid
+  userId                    String                    @db.Uuid
+  experienceSlotId          String                    @db.Uuid
+  shopifyOrderLineId        String?                   @unique @db.Uuid
+  idempotencyKey            String                    @unique
+  status                    BookingStatus             @default(PENDING_PAYMENT)
+  paymentStatus             PaymentStatus             @default(PENDING)
+  refundStatus              RefundStatus              @default(NONE)
+  totalAmountCents          Int
+  contactFullName           String
+  contactEmail              String
+  contactPhone              String?
+  cancellationPolicyVersion String                    @default("MVP-2026-06")
+  createdAt                 DateTime                  @default(now())
+  updatedAt                 DateTime                  @updatedAt
+  user                      User                      @relation(fields: [userId], references: [id])
+  experienceSlot            ExperienceSlot            @relation(fields: [experienceSlotId], references: [id])
+  orderLine                 ShopifyOrderLine?         @relation("PrimaryBookingOrderLine", fields: [shopifyOrderLineId], references: [id])
+  orderLines                ShopifyOrderLine[]        @relation("BookingOrderLines")
+  participantCounts         BookingParticipantCount[]
+  cancellationRequests      CancellationRequest[]
+
+  @@index([experienceSlotId, status])
+  @@index([userId, createdAt])
+}
+
+model BookingParticipantCount {
+  id                    String              @id @default(uuid()) @db.Uuid
+  bookingId             String              @db.Uuid
+  participantCategoryId String              @db.Uuid
+  quantity              Int
+  unitPriceCents        Int
+  capacityWeight        Decimal             @db.Decimal(6, 2)
+  booking               Booking             @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  participantCategory   ParticipantCategory @relation(fields: [participantCategoryId], references: [id])
+
+  @@unique([bookingId, participantCategoryId])
+}
+
+model CancellationRequest {
+  id                String   @id @default(uuid()) @db.Uuid
+  bookingId         String   @db.Uuid
+  requestedAt       DateTime @default(now())
+  reason            String?
+  feeRate           Decimal  @db.Decimal(5, 2)
+  feeAmountCents    Int
+  refundAmountCents Int
+  status            String   @default("REQUESTED")
+  booking           Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+model ExperienceEligibilityRule {
+  id           String     @id @default(uuid()) @db.Uuid
+  experienceId String     @db.Uuid
+  courseId     String?    @db.Uuid
+  ruleType     String
+  createdAt    DateTime   @default(now())
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+}
+
+model ShopifyProductMapping {
+  id                    String               @id @default(uuid()) @db.Uuid
+  shopifyProductGid     String
+  shopifyVariantGid     String               @unique
+  resourceType          ShopifyResourceType
+  resourceId            String               @db.Uuid
+  courseOfferingId      String?              @db.Uuid
+  experienceId          String?              @db.Uuid
+  participantCategoryId String?              @db.Uuid
+  isActive              Boolean              @default(true)
+  createdAt             DateTime             @default(now())
+  courseOffering        CourseOffering?      @relation(fields: [courseOfferingId], references: [id])
+  experience            Experience?          @relation(fields: [experienceId], references: [id])
+  participantCategory   ParticipantCategory? @relation(fields: [participantCategoryId], references: [id])
+}
+
+model ShopifyOrder {
+  id              String             @id @default(uuid()) @db.Uuid
+  userId          String?            @db.Uuid
+  orderGid        String             @unique
+  orderName       String?
+  customerGid     String?
+  email           String?
+  financialStatus String?
+  totalPriceCents Int
+  currencyCode    String             @default("USD")
+  payload         Json
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  user            User?              @relation(fields: [userId], references: [id])
+  lines           ShopifyOrderLine[]
+}
+
+model ShopifyOrderLine {
+  id                   String               @id @default(uuid()) @db.Uuid
+  shopifyOrderId       String               @db.Uuid
+  lineItemGid          String               @unique
+  shopifyVariantGid    String
+  bookingId            String?              @db.Uuid
+  title                String
+  quantity             Int
+  unitPriceCents       Int
+  totalPriceCents      Int
+  resourceType         ShopifyResourceType?
+  resourceId           String?              @db.Uuid
+  entitlementSourceKey String               @unique
+  payload              Json
+  createdAt            DateTime             @default(now())
+  order                ShopifyOrder         @relation(fields: [shopifyOrderId], references: [id], onDelete: Cascade)
+  primaryBooking       Booking?             @relation("PrimaryBookingOrderLine")
+  booking              Booking?             @relation("BookingOrderLines", fields: [bookingId], references: [id])
+  enrollment           Enrollment?
+
+  @@index([bookingId])
+}
+
+model ShopifyWebhookEvent {
+  id          String        @id @default(uuid()) @db.Uuid
+  webhookId   String        @unique
+  topic       String
+  shopDomain  String?
+  status      WebhookStatus @default(RECEIVED)
+  orderGid    String?
+  payload     Json
+  error       String?
+  receivedAt  DateTime      @default(now())
+  processedAt DateTime?
+}
+
+model IntegrationJob {
+  id          String               @id @default(uuid()) @db.Uuid
+  kind        String
+  status      IntegrationJobStatus @default(PENDING)
+  referenceId String
+  attempts    Int                  @default(0)
+  availableAt DateTime             @default(now())
+  lockedAt    DateTime?
+  lastError   String?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  @@index([status, availableAt])
+}
+
+model OutboxEvent {
+  id          String       @id @default(uuid()) @db.Uuid
+  topic       String
+  payload     Json
+  status      OutboxStatus @default(PENDING)
+  attempts    Int          @default(0)
+  createdAt   DateTime     @default(now())
+  publishedAt DateTime?
+}
+
+model AuditLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  actorUserId String?  @db.Uuid
+  action      String
+  entityType  String
+  entityId    String
+  before      Json?
+  after       Json?
+  createdAt   DateTime @default(now())
+  actor       User?    @relation(fields: [actorUserId], references: [id])
+}
+
+model RaffleCounter {
+  campaignCode String @id
+  lastNumber   Int    @default(0)
+}
+
+model RaffleEntry {
+  id                String    @id @default(uuid()) @db.Uuid
+  campaignCode      String
+  serialNumber      Int
+  accessToken       String    @unique
+  email             String
+  phone             String?
+  firstName         String?
+  lastName          String?
+  gender            String?
+  dateOfBirth       DateTime? @db.Date
+  addressLine1      String?
+  addressLine2      String?
+  city              String?
+  region            String?
+  postalCode        String?
+  country           String?
+  privacyConsentAt  DateTime
+  marketingOptIn    Boolean   @default(false)
+  marketingOptInAt  DateTime?
+  shopifyCustomerId String?
+  shopifySyncedAt   DateTime?
+  shopifySyncError  String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@unique([campaignCode, email])
+  @@unique([campaignCode, serialNumber])
+  @@index([campaignCode])
+}

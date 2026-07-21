@@ -22,6 +22,8 @@
 - [`design.md`](./design.md) — 設計書（要件確定事項、データモデル、API、Web画面、UIコピー）
 - [`plan.md`](./plan.md) — 実装計画（タスク分解・TDDステップ）
 - [`HANDOFF.md`](./HANDOFF.md) — 実装引き継ぎメモ（未実装項目・意図的なスコープ外・申し送り事項）
+- [`code/`](./code/) — Task 1-19実装分のうち福引機能に関連する変更ファイルのみのスナップショット
+  （モノレポの一部抜粋のためこの場所単体では起動不可。詳細は [`code/README.md`](./code/README.md)）
 
 正本は `LIVAPON_platform` リポジトリの
 `docs/superpowers/specs/2026-07-21-japan-festival-raffle-design.md`、
