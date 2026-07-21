@@ -21,8 +21,10 @@
 
 - [`design.md`](./design.md) — 設計書（要件確定事項、データモデル、API、Web画面、UIコピー）
 - [`plan.md`](./plan.md) — 実装計画（タスク分解・TDDステップ）
+- [`HANDOFF.md`](./HANDOFF.md) — 実装引き継ぎメモ（未実装項目・意図的なスコープ外・申し送り事項）
 
 正本は `LIVAPON_platform` リポジトリの
-`docs/superpowers/specs/2026-07-21-japan-festival-raffle-design.md` および
-`docs/superpowers/plans/2026-07-21-japan-festival-raffle.md`。このフォルダの2ファイルは
+`docs/superpowers/specs/2026-07-21-japan-festival-raffle-design.md`、
+`docs/superpowers/plans/2026-07-21-japan-festival-raffle.md` および
+`docs/superpowers/specs/2026-07-21-japan-festival-raffle-handoff.md`。このフォルダの3ファイルは
 2026-07-21時点のスナップショット控え。
