@@ -30,7 +30,7 @@
 *{box-sizing:border-box}
 body{
   background:var(--bg);color:var(--ink);
-  font-family:var(--f-body);font-size:15px;line-height:2;letter-spacing:.04em;
+  font-family:var(--f-body);font-size:14px;line-height:2;letter-spacing:.04em;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px));
   -webkit-font-smoothing:antialiased;
@@ -39,15 +39,15 @@ main{max-width:440px;margin:0 auto;display:flex;flex-direction:column}
 section{padding-block:72px;display:flex;flex-direction:column;gap:28px}
 section + section{border-top:1px solid var(--hair)}
 
-.eyebrow{font-family:var(--f-latin);font-style:italic;font-size:15px;letter-spacing:.12em;color:var(--accent)}
+.eyebrow{font-family:var(--f-latin);font-style:italic;font-size:14px;letter-spacing:.12em;color:var(--accent)}
 .dummy{display:inline-block;font-family:var(--f-body);font-style:normal;font-size:10px;letter-spacing:.14em;color:var(--dummy);border:1px solid var(--dummy);border-radius:2px;padding:0 6px;line-height:18px;vertical-align:middle;margin-left:8px}
 
 /* 00 はじめに */
 .opening{padding-block:88px 64px;gap:36px}
-.opening h1{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.9;letter-spacing:.12em;margin:0;text-wrap:balance}
+.opening h1{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.9;letter-spacing:.12em;margin:0;text-wrap:balance}
 .opening p{margin:0;color:var(--muted);font-size:14px}
 .from{display:flex;align-items:baseline;gap:12px;font-family:var(--f-display);font-size:14px;color:var(--muted)}
-.from strong{font-weight:600;font-size:17px;color:var(--ink);letter-spacing:.2em}
+.from strong{font-weight:600;font-size:16px;color:var(--ink);letter-spacing:.2em}
 .second{
   /* 1秒の目盛り：60本の線のうち1本だけ色を持つ */
   display:grid;grid-template-columns:repeat(60,1fr);gap:2px;height:14px;align-items:end;margin-top:8px
@@ -61,23 +61,23 @@ section + section{border-top:1px solid var(--hair)}
 }
 
 /* 01 歩美さんの言葉（縦書き） */
-.message{display:flex;flex-direction:column;gap:1.5em;font-family:var(--f-display);font-size:17px;line-height:2.1;letter-spacing:.08em}
+.message{display:flex;flex-direction:column;gap:1.5em;font-family:var(--f-display);font-size:15.5px;line-height:2.1;letter-spacing:.08em}
 .message p{margin:0}
-.message .key{font-size:24px;font-weight:600;letter-spacing:.16em;color:var(--accent)}
+.message .key{font-size:21px;font-weight:600;letter-spacing:.16em;color:var(--accent)}
 .message .em{color:var(--accent);font-weight:600}
 .message .sign{font-size:14px;color:var(--muted);text-align:end;letter-spacing:.2em}
 .words{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .word{display:flex;flex-direction:column;gap:4px;padding:16px 14px;border-top:1px solid var(--accent)}
-.word b{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:.16em}
+.word b{font-family:var(--f-display);font-weight:600;font-size:16px;letter-spacing:.16em}
 .word span{font-size:12px;line-height:1.8;color:var(--muted)}
 
 /* 02 KuONのあとがき */
-.afterword h2,.closing h2{font-family:var(--f-display);font-weight:400;font-size:19px;letter-spacing:.14em;line-height:1.8;margin:0;text-wrap:balance}
+.afterword h2,.closing h2{font-family:var(--f-display);font-weight:400;font-size:17px;letter-spacing:.14em;line-height:1.8;margin:0;text-wrap:balance}
 .afterword{gap:56px}
-.afterword .body{display:flex;flex-direction:column;gap:2.6em;font-family:var(--f-display);font-size:15.5px;line-height:2.3;letter-spacing:.06em}
+.afterword .body{display:flex;flex-direction:column;gap:2.6em;font-family:var(--f-display);font-size:14px;line-height:2.3;letter-spacing:.06em}
 .afterword .body p{margin:0}
-.afterword .pause{padding-block:1.2em;font-size:17px;line-height:2.6}
-.afterword .quote{font-size:17px;color:var(--accent);text-align:center;padding-block:.6em}
+.afterword .pause{padding-block:1.2em;font-size:15.5px;line-height:2.6}
+.afterword .quote{font-size:15.5px;color:var(--accent);text-align:center;padding-block:.6em}
 .postscript{display:flex;flex-direction:column;gap:1em;padding-top:28px;border-top:1px solid var(--hair);font-size:13px;line-height:2;color:var(--muted)}
 .postscript p{margin:0}
 .ps-label{font-family:var(--f-display);font-size:14px;letter-spacing:.2em;color:var(--ink)}
@@ -91,15 +91,15 @@ section + section{border-top:1px solid var(--hair)}
 figure.shot{margin:0;display:flex;flex-direction:column;gap:8px}
 figure.shot img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
 .maison{display:flex;flex-direction:column;gap:2px;align-items:flex-end;font-size:12px;color:var(--muted)}
-.maison .logo{font-family:var(--f-latin);font-size:30px;letter-spacing:.24em;color:var(--ink);line-height:1.2}
+.maison .logo{font-family:var(--f-latin);font-size:26px;letter-spacing:.24em;color:var(--ink);line-height:1.2}
 
 /* 03 締め・LINE */
 .closing{padding-block:72px 96px}
-.closing .msg{font-family:var(--f-display);font-size:16px;line-height:2.1;margin:0}
+.closing .msg{font-family:var(--f-display);font-size:14.5px;line-height:2.1;margin:0}
 .line-btn{
   display:flex;align-items:center;justify-content:center;gap:10px;
   background:var(--line);color:var(--line-ink);text-decoration:none;
-  font-family:var(--f-body);font-weight:500;font-size:16px;letter-spacing:.08em;
+  font-family:var(--f-body);font-weight:500;font-size:15px;letter-spacing:.08em;
   min-height:56px;border-radius:999px;
 }
 .line-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
