@@ -1,0 +1,172 @@
+<title>一秒宝 大谷歩美</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: 名刺から開く一通の手紙。縦書きの「歩美さんの言葉」→ 横書きの「KuONのあとがき」→ 再び歩美さんの言葉でLINEへ。スマホ1カラム、余白多め。 */
+:root{
+  --bg:#F2F1F4;        /* 真珠の地 */
+  --paper:#FBFAFC;     /* 便箋 */
+  --ink:#2B2833;       /* 墨 */
+  --muted:#7A7482;
+  --hair:#DAD5DF;
+  --accent:#8F7480;    /* ローズプラチナ */
+  --line:#06C755;      /* LINE公式グリーン */
+  --line-ink:#FFFFFF;
+  --dummy:#B9A3AD;
+  --f-display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-latin:"Cormorant Garamond","Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16151A;--paper:#1E1C23;--ink:#ECE8EF;--muted:#A49DAB;--hair:#35323C;--accent:#C7A9B5;--line:#06C755;--line-ink:#FFFFFF;--dummy:#7E6C75;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16151A;--paper:#1E1C23;--ink:#ECE8EF;--muted:#A49DAB;--hair:#35323C;--accent:#C7A9B5;--line:#06C755;--line-ink:#FFFFFF;--dummy:#7E6C75;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--f-body);font-size:15px;line-height:2;letter-spacing:.04em;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased;
+}
+main{max-width:440px;margin:0 auto;display:flex;flex-direction:column}
+section{padding-block:72px;display:flex;flex-direction:column;gap:28px}
+section + section{border-top:1px solid var(--hair)}
+
+.eyebrow{font-family:var(--f-latin);font-style:italic;font-size:15px;letter-spacing:.12em;color:var(--accent)}
+.dummy{display:inline-block;font-family:var(--f-body);font-style:normal;font-size:10px;letter-spacing:.14em;color:var(--dummy);border:1px solid var(--dummy);border-radius:2px;padding:0 6px;line-height:18px;vertical-align:middle;margin-left:8px}
+
+/* 00 はじめに */
+.opening{padding-block:88px 64px;gap:36px}
+.opening h1{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.9;letter-spacing:.12em;margin:0;text-wrap:balance}
+.opening p{margin:0;color:var(--muted);font-size:14px}
+.from{display:flex;align-items:baseline;gap:12px;font-family:var(--f-display);font-size:14px;color:var(--muted)}
+.from strong{font-weight:600;font-size:17px;color:var(--ink);letter-spacing:.2em}
+.second{
+  /* 1秒の目盛り：60本の線のうち1本だけ色を持つ */
+  display:grid;grid-template-columns:repeat(60,1fr);gap:2px;height:14px;align-items:end;margin-top:8px
+}
+.second i{display:block;height:6px;background:var(--hair)}
+.second i:nth-child(5n+1){height:10px}
+.second i.now{height:14px;background:var(--accent)}
+@media (prefers-reduced-motion:no-preference){
+  .second i.now{animation:tick 1s steps(1) infinite}
+  @keyframes tick{50%{opacity:.35}}
+}
+
+/* 01 歩美さんの言葉（縦書き） */
+.letter{background:var(--paper);border:1px solid var(--hair);padding:40px 24px;display:flex;justify-content:center;overflow-x:auto}
+.tategaki{
+  writing-mode:vertical-rl;font-family:var(--f-display);font-size:17px;line-height:2.2;letter-spacing:.18em;
+  height:min(26em,72vh);margin:0;
+}
+.tategaki p{margin:0 0 0 1.2em}
+.tategaki .key{font-size:21px;font-weight:600;color:var(--accent)}
+.tategaki .sign{margin-top:auto;padding-top:1em;font-size:14px;color:var(--muted);text-align:end}
+.words{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.word{display:flex;flex-direction:column;gap:4px;padding:16px 14px;border-top:1px solid var(--accent)}
+.word b{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:.16em}
+.word span{font-size:12px;line-height:1.8;color:var(--muted)}
+
+/* 02 KuONのあとがき */
+.afterword h2,.closing h2{font-family:var(--f-display);font-weight:400;font-size:19px;letter-spacing:.14em;line-height:1.8;margin:0;text-wrap:balance}
+.afterword .body{display:flex;flex-direction:column;gap:1.4em}
+.afterword .body p{margin:0}
+.photo{
+  aspect-ratio:4/5;max-width:100%;border:1px dashed var(--hair);
+  display:grid;place-items:center;text-align:center;color:var(--muted);font-size:12px;line-height:1.8;background:var(--paper)
+}
+.photo.wide{aspect-ratio:3/2}
+.maison{display:flex;flex-direction:column;gap:2px;align-items:flex-end;font-size:12px;color:var(--muted)}
+.maison .logo{font-family:var(--f-latin);font-size:30px;letter-spacing:.24em;color:var(--ink);line-height:1.2}
+
+/* 03 締め・LINE */
+.closing{padding-block:72px 96px}
+.closing .msg{font-family:var(--f-display);font-size:16px;line-height:2.1;margin:0}
+.line-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--line);color:var(--line-ink);text-decoration:none;
+  font-family:var(--f-body);font-weight:500;font-size:16px;letter-spacing:.08em;
+  min-height:56px;border-radius:999px;
+}
+.line-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.line-btn svg{width:22px;height:22px;flex:none}
+.note{font-size:12px;color:var(--muted);text-align:center;margin:0}
+footer{padding-block:32px 48px;text-align:center;font-family:var(--f-latin);font-size:12px;letter-spacing:.2em;color:var(--muted);border-top:1px solid var(--hair)}
+</style>
+
+<main>
+
+  <!-- 00 はじめに：名刺から来た人への御礼 -->
+  <section class="opening" id="hello">
+    <div class="eyebrow">Thank you for opening</div>
+    <h1>このページを開いてくださり、<br>ありがとうございます。</h1>
+    <p>名刺をお渡しした、その一瞬のご縁に感謝を込めて。<span class="dummy">仮原稿</span></p>
+    <div class="from">from <strong>大谷 歩美</strong></div>
+    <div class="second" aria-hidden="true" id="sec"></div>
+  </section>
+
+  <!-- 01 歩美さんの言葉：一秒宝／生き切る -->
+  <section id="message">
+    <div class="eyebrow">Message <span class="dummy">仮原稿</span></div>
+    <div class="letter">
+      <div class="tategaki">
+        <p><span class="key">一秒宝</span>（いちびょうほう）。</p>
+        <p>一秒は、宝もの。</p>
+        <p>大切な人を見送ったあの日から、</p>
+        <p>わたしはそう思って生きています。</p>
+        <p>いま、あなたと交わしたこの一瞬も、</p>
+        <p>もう二度と来ない、宝もの。</p>
+        <p>だから、<span class="key">生き切る</span>。</p>
+        <p>明日のためだけじゃなく、</p>
+        <p>この一秒を、ちゃんと生きるために。</p>
+        <p class="sign">大谷 歩美</p>
+      </div>
+    </div>
+    <div class="words">
+      <div class="word"><b>一秒宝</b><span>一瞬一瞬を、宝ものとして大切にすること。</span></div>
+      <div class="word"><b>生き切る</b><span>与えられた時間を、最後まで自分らしく生きること。</span></div>
+    </div>
+  </section>
+
+  <!-- 02 KuONからのあとがき -->
+  <section class="afterword" id="afterword">
+    <div class="eyebrow">Afterword — from KuON <span class="dummy">仮原稿</span></div>
+    <h2>あとがき<br>ジュエリーメゾン KuON より</h2>
+    <div class="photo">［写真枠］<br>大谷歩美さんのポートレート<br>または KuONのジュエリーを身につけた姿</div>
+    <div class="body">
+      <p>歩美さんと初めてお会いした日のことを、私たちはよく覚えています。目の前の人の話に、まっすぐ耳を傾ける方でした。</p>
+      <p>「一秒宝」。歩美さんがいつも口にするこの言葉を聞いたとき、KuONがジュエリーをつくる理由と、同じところにある気がしました。</p>
+      <p>KuONの名前には、永く、遠く続いていくもの、という想いを込めています。一瞬を大切に生きる人の胸もとで、その一瞬を永く残していく。それが私たちの仕事です。</p>
+      <p>講演の場で、そしてこの名刺を通じて。歩美さんが出会う一人ひとりとの時間が、これからも宝ものでありますように。</p>
+    </div>
+    <div class="photo wide">［写真枠］<br>KuONのジュエリー／アトリエ</div>
+    <div class="maison"><span class="logo">KuON</span><span>Jewelry Maison</span></div>
+  </section>
+
+  <!-- 03 歩美さんからの締めとLINE -->
+  <section class="closing" id="contact">
+    <div class="eyebrow">From Ayumi</div>
+    <p class="msg">私自身も応援しているジュエリーメゾンですので、ぜひ、KuONさんとお話をしてみたい、という方がいらっしゃいましたら、こちらのLINEまでご連絡ください♩</p>
+    <a class="line-btn" href="https://lin.ee/XXXXXXX" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11.1c0 4 3.6 7.4 8.4 8 .3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.6 1.1-.5 6-3.5 8.2-6 1.5-1.7 2.2-3.3 2.2-5C22.5 6.6 17.5 3 12 3z"/></svg>
+      KuONをLINEで友だち追加
+    </a>
+    <p class="note">LINE ID：@xxxxxxx（仮）</p>
+  </section>
+
+</main>
+<footer>© KuON Jewelry Maison</footer>
+
+<script>
+(function(){
+  var el=document.getElementById('sec');if(!el)return;
+  for(var i=0;i<60;i++){var t=document.createElement('i');if(i===new Date().getSeconds())t.className='now';el.appendChild(t);}
+})();
+</script>
